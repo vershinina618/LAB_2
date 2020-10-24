@@ -21,14 +21,14 @@ int main(void)
 
 char int_to_char(int number)
 {
-	if ( number >= 0 && number <= 9 )
-  {
-		return number + '0';
-		}
-  else
-  {
-		return number + 'A' - 10;
-	}
+    if ( number >= 0 && number <= 9 )
+    {
+       return number + '0';
+    }
+    else
+   {
+       return number + 'A' - 10;
+   }
 }
 
 void power(int number, int source, int target)
