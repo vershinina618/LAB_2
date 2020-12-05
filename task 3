@@ -1,41 +1,50 @@
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 
-void power(int number, int source, int target);
-char int_to_char(int number);
+void power(int, int, int);
+char int_to_char(int);
 
 int main(void) 
 {
   int number, source, target;
-    scanf("%d %d %d", &number, &source, &target);
-    if (target > 32 || source > 11)
-    {
-      printf("error");
-    }
-    else
-    {
-      power(number, source, target);
-    }
+  scanf("%d %d %d", &number, &source, &target);
+  if (target > 31 || source > 10)
+  {
+    printf("error");
+  }
+  else
+  {
+    power(number, source, target);
+  }
+
+  return 0;
 }
 
 char int_to_char(int number)
 {
-    if ( number >= 0 && number <= 9 )
-    {
-       return number + '0';
-    }
-    else
-    {
-       return number + 'A' - 10;
-    }
+  if (number >= 0 && number <= 9) 
+  {
+    return number + '0';
+  }
+  else if (number >= 10 && number <= 32) 
+  {
+    return number - 10 + 'A';
+  }
+  else 
+  {
+    return ' ';
+  }
 }
 
 void power(int number, int source, int target)
 {
-  int result_in_decimal ;
+  int result_in_decimal = 0;
   int lengt = sizeof(number) / sizeof(int);
   char result[100];
+  for (int q = 0; q < 30; q++)  
+  {
+    result[q] = 0;
+  }
  
   while (number > 0)
   {
@@ -43,6 +52,10 @@ void power(int number, int source, int target)
     result_in_decimal += number % 10 * pow;
     pow *= source;
     number /= 10;
+    if (number <= 0)
+    {
+      pow = 1;
+    }
   }
 
   while (result_in_decimal > 0)
@@ -50,6 +63,10 @@ void power(int number, int source, int target)
     static int q = 0;
     result[q++] = int_to_char(result_in_decimal % target);
     result_in_decimal /= target;
+    if (result_in_decimal <= 0)
+    {
+      q = 0;
+    }
   }
 
   int length = strlen(result);
@@ -59,6 +76,5 @@ void power(int number, int source, int target)
     result[length - 1 - q] = result[q] - result[length - q - 1];
     result[q] -= result[length - 1 - q];
   }
-
   printf("%s", result);
 }
