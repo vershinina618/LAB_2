@@ -7,6 +7,7 @@ int main(void)
   int number;
   scanf("%d", &number);
   printf("%lld", get_fibbonachi_via_recursion(number));
+  
   return 0;
 }
 
